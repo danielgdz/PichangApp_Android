@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PichangApp</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_name">Nombre</string>
+    <string name="btn_login">INGRESAR</string>
+    <string name="btn_register">REGISTRARSE</string>
+    <string name="btn_link_to_register">¿No tienes cuenta? Regístrate aquí.</string>
+    <string name="btn_link_to_login">¿Eres miembro? Ingresa aquí.</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="btn_logout">SALIR</string>
+    <string name="name">Nombre</string>
+
+</resources>
