@@ -63,20 +63,16 @@ public class Activity_Login extends Activity
 
         // Login button Click Event
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
                 String email = inputEmail.getText().toString();
                 String password = inputPassword.getText().toString();
-
                 // Check for empty data in the form
                 if (email.trim().length() > 0 && password.trim().length() > 0) {
                     // login user
                     checkLogin(email, password);
                 } else {
                     // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext(),
-                            "¡Por favor!, ingrese sus credenciales.", Toast.LENGTH_LONG)
-                            .show();
+                    Toast.makeText(getApplicationContext(), "¡Por favor!, ingrese sus credenciales.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -84,11 +80,9 @@ public class Activity_Login extends Activity
 
         // Link to Register Screen
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        Activity_Register.class);
-                startActivity(i);
+                Intent intent = new Intent(getApplicationContext(), Activity_Register.class);
+                startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
@@ -102,37 +96,29 @@ public class Activity_Login extends Activity
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
-
         pDialog.setMessage("Ingresando...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Method.POST,
-                Config_URL.URL_LOGIN, new Response.Listener<String>() {
-
+        StringRequest strReq = new StringRequest(Method.POST, Config_URL.URL_LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Login Response: " + response.toString());
                 hideDialog();
-
                 try {
                     JSONObject jObj = new JSONObject(response);
                     int status = jObj.getInt("status");
-
                     // Check for status node in json
                     if (status == 1) {
-                        // user successfully logged in
-                        // Create login session
+                        // user successfully logged in - create login session
                         session.setLogin(true);
                         // Launch main activity
-                        Intent intent = new Intent(Activity_Login.this,
-                                Activity_Main.class);
+                        Intent intent = new Intent(Activity_Login.this, Activity_Main.class);
                         startActivity(intent);
                         finish();
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
@@ -144,12 +130,10 @@ public class Activity_Login extends Activity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "No se pudo iniciar sesión");
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {
-
             @Override
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
@@ -157,10 +141,8 @@ public class Activity_Login extends Activity
                 params.put("tag", "login");
                 params.put("email", email);
                 params.put("password", password);
-
                 return params;
             }
-
         };
 
         // Adding request to request queue
@@ -168,12 +150,14 @@ public class Activity_Login extends Activity
     }
 
     private void showDialog() {
-        if (!pDialog.isShowing())
+        if (!pDialog.isShowing()) {
             pDialog.show();
+        }
     }
 
     private void hideDialog() {
-        if (pDialog.isShowing())
+        if (pDialog.isShowing()) {
             pDialog.dismiss();
+        }
     }
 }

@@ -33,8 +33,8 @@ public class Activity_Main extends Activity {
             logoutUser();
         }
 
-        String name = "a";
-        String email = "PichangApp";
+        String name = "Default name";
+        String email = "Default email";
 
         // Displaying the user details on the screen
         txtName.setText(name);
@@ -51,8 +51,7 @@ public class Activity_Main extends Activity {
     }
 
     /**
-     * Logging out the user. Will set isLoggedIn flag to false in shared
-     * preferences Clears the user data from sqlite users table
+     * Logging out the user.
      * */
     private void logoutUser() {
         session.setLogin(false);
