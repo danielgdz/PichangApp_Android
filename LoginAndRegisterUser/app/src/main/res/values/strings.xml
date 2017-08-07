@@ -10,7 +10,10 @@
     <string name="btn_link_to_register">¿No tienes cuenta? Regístrate aquí.</string>
     <string name="btn_link_to_login">¿Eres miembro? Ingresa aquí.</string>
     <string name="welcome">Bienvenido</string>
-    <string name="btn_logout">SALIR</string>
+    <string name="btn_map">Ver canchas</string>
+    <string name="btn_friends">Ver amigos</string>
+    <string name="btn_logout">Salir</string>
     <string name="name">Nombre</string>
+    <string name="title_activity__map">Map</string>
 
 </resources>

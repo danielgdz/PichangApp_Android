@@ -1,20 +1,23 @@
 package com.appnucleus.loginandregisteruser;
 
-import helper.SQLiteHandler;
 import helper.SessionManager;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class Activity_Main extends Activity {
 
+    private static final String TAG = Activity_Register.class.getSimpleName();
+
     private TextView txtName;
     private TextView txtEmail;
     private Button btnLogout;
+    private Button btnMap;
     private SessionManager session;
 
     @Override
@@ -25,6 +28,7 @@ public class Activity_Main extends Activity {
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnMap = (Button) findViewById(R.id.btnMap);
 
         // session manager
         session = new SessionManager(getApplicationContext());
@@ -33,13 +37,25 @@ public class Activity_Main extends Activity {
             logoutUser();
         }
 
-        String name = "Default name";
-        String email = "Default email";
+        // Fetching user details from sqlite
+        //HashMap<String, String> user = getApplicationContext();
+        Log.d(TAG, getApplicationContext().toString());
+
+        String name = "Daniel";//user.get("name");
+        String email = "¡Reserva tu cancha ahora!";//user.get("email");
 
         // Displaying the user details on the screen
         txtName.setText(name);
         txtEmail.setText(email);
 
+        // Map button click event
+        btnMap.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToMap();
+            }
+        });
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
@@ -50,6 +66,15 @@ public class Activity_Main extends Activity {
         });
     }
 
+    /**
+     * Go to map view
+     * */
+    private void goToMap() {
+        // Launching the map activity
+        Intent intent = new Intent(Activity_Main.this, Activity_Map.class);
+        startActivity(intent);
+        finish();
+    }
     /**
      * Logging out the user.
      * */

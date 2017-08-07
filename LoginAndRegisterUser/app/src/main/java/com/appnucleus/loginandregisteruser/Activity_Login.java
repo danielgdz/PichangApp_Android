@@ -124,13 +124,12 @@ public class Activity_Login extends Activity
                     // JSON error
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "No se pudo iniciar sesión");
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "No se pudo iniciar sesión.", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {
