@@ -1,4 +1,4 @@
-package com.appnucleus.loginandregisteruser;
+package club.smartlovers.pichangapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,10 +42,10 @@ public class Activity_Map extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(club.smartlovers.pichangapp.R.layout.activity_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(club.smartlovers.pichangapp.R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -66,7 +67,7 @@ public class Activity_Map extends FragmentActivity implements OnMapReadyCallback
         uiSettings.setMapToolbarEnabled(true);
         uiSettings.setZoomGesturesEnabled(true);
         mMap.setMyLocationEnabled(true);
-        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.night_style));
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, club.smartlovers.pichangapp.R.raw.night_style));
 
         LatLng jesusMaria = new LatLng(-12.0712084, -77.0445137);
         // Tag used to cancel the request
@@ -83,7 +84,8 @@ public class Activity_Map extends FragmentActivity implements OnMapReadyCallback
                         mapPoints[i] = new LatLng(jsonObject.optDouble("latitude"), jsonObject.optDouble("longitude"));
                         mMap.addMarker(new MarkerOptions().position(mapPoints[i])
                                 .title(jsonObject.optString("name"))
-                                .snippet(jsonObject.optString("contact_name") + " - " + jsonObject.optString("phone")));
+                                .snippet(jsonObject.optString("contact_name") + " - " + jsonObject.optString("phone"))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.smal_pin_pichangapp)));
                     }
                 } catch (JSONException e) {
                     // JSON error

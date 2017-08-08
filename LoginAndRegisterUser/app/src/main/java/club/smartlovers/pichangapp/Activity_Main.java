@@ -1,4 +1,4 @@
-package com.appnucleus.loginandregisteruser;
+package club.smartlovers.pichangapp;
 
 import helper.SessionManager;
 
@@ -23,12 +23,12 @@ public class Activity_Main extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(club.smartlovers.pichangapp.R.layout.activity_main);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnMap = (Button) findViewById(R.id.btnMap);
+        txtName = (TextView) findViewById(club.smartlovers.pichangapp.R.id.name);
+        txtEmail = (TextView) findViewById(club.smartlovers.pichangapp.R.id.email);
+        btnLogout = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnLogout);
+        btnMap = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnMap);
 
         // session manager
         session = new SessionManager(getApplicationContext());
@@ -41,8 +41,8 @@ public class Activity_Main extends Activity {
         //HashMap<String, String> user = getApplicationContext();
         Log.d(TAG, getApplicationContext().toString());
 
-        String name = "Daniel";//user.get("name");
-        String email = "¡Reserva tu cancha ahora!";//user.get("email");
+        String name = getIntent().getStringExtra("user_name");
+        String email = "¡Reserva tu cancha ahora!";
 
         // Displaying the user details on the screen
         txtName.setText(name);

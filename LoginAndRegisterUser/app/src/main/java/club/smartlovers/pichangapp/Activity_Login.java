@@ -1,4 +1,4 @@
-package com.appnucleus.loginandregisteruser;
+package club.smartlovers.pichangapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,12 +40,12 @@ public class Activity_Login extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(club.smartlovers.pichangapp.R.layout.activity_login);
 
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        inputEmail = (EditText) findViewById(club.smartlovers.pichangapp.R.id.email);
+        inputPassword = (EditText) findViewById(club.smartlovers.pichangapp.R.id.password);
+        btnLogin = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnLogin);
+        btnLinkToRegister = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnLinkToRegisterScreen);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -84,7 +85,7 @@ public class Activity_Login extends Activity
                 Intent intent = new Intent(getApplicationContext(), Activity_Register.class);
                 startActivity(intent);
                 finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                overridePendingTransition(club.smartlovers.pichangapp.R.anim.push_left_in, club.smartlovers.pichangapp.R.anim.push_left_out);
             }
         });
 
@@ -106,13 +107,19 @@ public class Activity_Login extends Activity
                 hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
+                    JSONArray jArray = jObj.getJSONArray("data");
+                    JSONObject jUser = jArray.getJSONObject(0);
                     int status = jObj.getInt("status");
                     // Check for status node in json
                     if (status == 1) {
-                        // user successfully logged in - create login session
                         session.setLogin(true);
                         // Launch main activity
                         Intent intent = new Intent(Activity_Login.this, Activity_Main.class);
+                        Log.d("Session", jArray.toString());
+                        Log.d("User", jUser.toString());
+                        // passing data
+                        intent.putExtra("user_name", jUser.getString("name"));
+                        // end passing data
                         startActivity(intent);
                         finish();
                     } else {

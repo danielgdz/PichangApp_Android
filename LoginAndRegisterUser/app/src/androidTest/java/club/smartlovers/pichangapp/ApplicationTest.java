@@ -1,4 +1,4 @@
-package com.appnucleus.loginandregisteruser;
+package com.smartlovers.pichangapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

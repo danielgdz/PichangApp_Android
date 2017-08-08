@@ -1,4 +1,4 @@
-package com.appnucleus.loginandregisteruser;
+package club.smartlovers.pichangapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -31,6 +31,7 @@ public class Activity_Register extends Activity {
     private Button btnLinkToLogin;
     private EditText inputFullName;
     private EditText inputEmail;
+    private EditText inputLastname;
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -38,13 +39,14 @@ public class Activity_Register extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(club.smartlovers.pichangapp.R.layout.activity_register);
 
-        inputFullName = (EditText) findViewById(R.id.name);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        inputFullName = (EditText) findViewById(club.smartlovers.pichangapp.R.id.name);
+        inputEmail = (EditText) findViewById(club.smartlovers.pichangapp.R.id.email);
+        inputEmail = (EditText) findViewById(club.smartlovers.pichangapp.R.id.lastname);
+        inputPassword = (EditText) findViewById(club.smartlovers.pichangapp.R.id.password);
+        btnRegister = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnRegister);
+        btnLinkToLogin = (Button) findViewById(club.smartlovers.pichangapp.R.id.btnLinkToLoginScreen);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -66,10 +68,11 @@ public class Activity_Register extends Activity {
             public void onClick(View view) {
             String name = inputFullName.getText().toString();
             String email = inputEmail.getText().toString();
+            String lastname = "lastname"; //inputLastname.getText().toString();
             String password = inputPassword.getText().toString();
 
-            if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                registerUser(name, email, password);
+            if (!name.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                registerUser(name, email, password, lastname);
             } else {
                 Toast.makeText(getApplicationContext(), "¡Por favor!, complete todos los campos.", Toast.LENGTH_LONG).show();
             }
@@ -83,13 +86,13 @@ public class Activity_Register extends Activity {
                 Intent intent = new Intent(getApplicationContext(), Activity_Login.class);
                 startActivity(intent);
                 finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                overridePendingTransition(club.smartlovers.pichangapp.R.anim.push_left_in, club.smartlovers.pichangapp.R.anim.push_left_out);
             }
         });
 
     }
 
-    private void registerUser(final String name, final String email, final String password) {
+    private void registerUser(final String name, final String email, final String password, final String lastname) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
         pDialog.setMessage("Registrando ...");
@@ -108,6 +111,7 @@ public class Activity_Register extends Activity {
                         String uid = jObj.getString("id");
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
+                        String lastname = user.getString("lastname");
                         String email = user.getString("email");
                         String created_at = user.getString("created_at");
                         // Launch login activity
@@ -138,8 +142,12 @@ public class Activity_Register extends Activity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tag", "register");
                 params.put("name", name);
+                params.put("lastname", lastname);
                 params.put("email", email);
                 params.put("password", password);
+                params.put("app_id", "1");
+                params.put("role_id", "1");
+                params.put("flag_admin", "0");
                 return params;
             }
 
