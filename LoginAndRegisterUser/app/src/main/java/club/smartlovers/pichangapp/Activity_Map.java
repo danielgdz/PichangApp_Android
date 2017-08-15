@@ -66,50 +66,50 @@ public class Activity_Map extends FragmentActivity implements OnMapReadyCallback
         uiSettings.setMyLocationButtonEnabled(true);
         uiSettings.setMapToolbarEnabled(true);
         uiSettings.setZoomGesturesEnabled(true);
-        mMap.setMyLocationEnabled(true);
-        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, club.smartlovers.pichangapp.R.raw.night_style));
+//        mMap.setMyLocationEnabled(true);
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.night_style));
 
         LatLng jesusMaria = new LatLng(-12.0712084, -77.0445137);
         // Tag used to cancel the request
 
-        StringRequest strReq = new StringRequest(Method.GET, Config_URL.URL_SUBSIDIARIES, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    // Check for status node in json
-                    mapObject = new JSONArray(response);
-                    LatLng[] mapPoints = new LatLng[mapObject.length()];
-                    for (int i = 0; i < mapObject.length(); i++) {
-                        JSONObject jsonObject =  mapObject.optJSONObject(i);
-                        mapPoints[i] = new LatLng(jsonObject.optDouble("latitude"), jsonObject.optDouble("longitude"));
-                        mMap.addMarker(new MarkerOptions().position(mapPoints[i])
-                                .title(jsonObject.optString("name"))
-                                .snippet(jsonObject.optString("contact_name") + " - " + jsonObject.optString("phone"))
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.smal_pin_pichangapp)));
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("URL_SUBSIDIARIES", "No se pudo cargar las canchas");
-                Toast.makeText(getApplicationContext(), "No se pudo cargar las canchas", Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
+//        StringRequest strReq = new StringRequest(Method.GET, Config_URL.URL_SUBSIDIARIES, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    // Check for status node in json
+//                    mapObject = new JSONArray(response);
+//                    LatLng[] mapPoints = new LatLng[mapObject.length()];
+//                    for (int i = 0; i < mapObject.length(); i++) {
+//                        JSONObject jsonObject =  mapObject.optJSONObject(i);
+//                        mapPoints[i] = new LatLng(jsonObject.optDouble("latitude"), jsonObject.optDouble("longitude"));
+//                        mMap.addMarker(new MarkerOptions().position(mapPoints[i])
+//                                .title(jsonObject.optString("name"))
+//                                .snippet(jsonObject.optString("contact_name") + " - " + jsonObject.optString("phone"))
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.smal_pin_pichangapp)));
+//                    }
+//                } catch (JSONException e) {
+//                    // JSON error
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("URL_SUBSIDIARIES", "No se pudo cargar las canchas");
+//                Toast.makeText(getApplicationContext(), "No se pudo cargar las canchas", Toast.LENGTH_LONG).show();
+//                hideDialog();
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                // Posting parameters to login url
+//                Map<String, String> params = new HashMap<String, String>();
+//                return params;
+//            }
+//        };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, "maps");
+//        AppController.getInstance().addToRequestQueue(strReq, "maps");
         // Initial Position
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jesusMaria, 14.0f));
     }

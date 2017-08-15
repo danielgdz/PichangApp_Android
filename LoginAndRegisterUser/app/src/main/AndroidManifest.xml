@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="volley.AppController"
         android:allowBackup="true"
         android:icon="@drawable/logo_pichangapp"
         android:theme="@style/AppTheme">
@@ -44,12 +43,19 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
         <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
             android:name=".Activity_Map"
-            android:label="@string/title_activity__map"></activity>
+            android:label="@string/title_activity__map" />
+        <activity
+            android:name=".Activity_Navigation"
+            android:label="@string/title_activity__navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

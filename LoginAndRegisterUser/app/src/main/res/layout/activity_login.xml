@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/bg_login"
+    android:background="@drawable/bg4"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp" >
@@ -60,6 +61,12 @@
             android:text="@string/btn_login"
             android:textColor="@color/btn_login" />
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fb_login_bn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:textSize="15dp"></com.facebook.login.widget.LoginButton>
         <!-- Link to Login Screen -->
 
         <Button
